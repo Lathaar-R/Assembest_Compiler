@@ -1,0 +1,24 @@
+INT a, 0
+ATR a, 5
+
+LBL f 
+BGN 
+    SUB a, 5, a
+
+END
+
+LBL g
+BGN
+    ADD a, 5, a
+END
+
+INT v1, 1
+INT v2, 1
+INT v3, 0
+
+AND v1, v2, v3
+
+IIF v3, f
+ELS g
+
+OUT a
