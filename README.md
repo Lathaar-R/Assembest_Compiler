@@ -3,13 +3,13 @@
 
 Este repositório contém o código do compilador da linguagem "Assembest" da matéria ECOM06A (Compiladores) do curso Engenharia de Computação da Univercidade Federal de Itajubá.
 
+## Utilização
+Baixe o repositório e rode o executável do compilador ASBCompiler.exe [arquivo_de_entrada.asb]. O compilador irá gerar um arquivo de saída executável "out.exe" e o "rquivo_de_entrada_tokens_comandos.txt".
+
 ## Linguagem
 Assembest é uma linguagem de programação de baixo nível interpretada, baseada em Assembly, que possui instruções de controle de fluxo, operações aritméticas e lógicas, e operações de entrada e saída. O compilador da linguagem Assembest foi programada em C++ e gera código intermediário em C++.
 
 A linguagem foi buildada utilizando a ferramenta CMake gerando um executável para o compilador.
-
-#Utilização
-Baixe o repositório e rode o executável do compilador ASBCompiler.exe [arquivo_de_entrada.asb]. O compilador irá gerar um arquivo de saída executável "out.exe".
 
 # Gramática
 
@@ -95,3 +95,14 @@ Follow(compound_instruction_tail) = {COMP, $}
 | compound_instruction |               |               |               | comp_keyword  |               |               |
 | compound_instruction_tail |               |               |               | comp_keyword program comp_keyword | ',' identifier [comp_keyword identifier] | ε |
 
+# Funcionamento
+O programa a ser compilado passa por 3 etapas: Análise Léxica, Análise Sintática e Geração de Código.
+
+## Análise Léxica
+A análise léxica é feita por um analisador léxico que lê o arquivo de entrada e gera uma lista de tokens. Cada token é um par de um tipo e um valor. O analisador léxico é implementado em C++ e utiliza expressões regulares para identificar os tokens.
+
+## Análise Sintática
+A análise sintática é feita por um analisador sintático LL(1) preditivo não recursivo. O analisador sintático lê a lista de tokens gerada pela análise léxica e gera uma árvore sintática abstrata (AST). A AST é uma representação da estrutura do programa em forma de árvore. O analisador sintático é implementado em C++.
+
+## Geração de Código
+A geração de código é feita a partir da AST gerada pela análise sintática. A AST é percorrida em pré-ordem e cada nó é traduzido para código C++. O código gerado é salvo em um arquivo de saída.
