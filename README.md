@@ -25,7 +25,7 @@ O compilador irá gerar os seguintes arquivos:
 ## Linguagem
 Assembest é uma linguagem de programação de baixo nível interpretada, baseada em Assembly, que possui instruções de controle de fluxo, operações aritméticas e lógicas, e operações de entrada e saída. O compilador da linguagem Assembest foi programada em C++ e gera código intermediário em C++.
 
-"A linguagem foi construída utilizando a ferramenta CMake, gerando um executável para o compilador."
+A linguagem foi construída utilizando a ferramenta CMake, gerando um executável para o compilador.
 
 # Gramática
 
