@@ -113,6 +113,10 @@ Follow(compound_instruction_tail) = {COMP}
 | compound_instruction |               |               |               | comp_keyword  |               |               |
 | compound_instruction_tail |               |               |               | comp_keyword program comp_keyword | ',' identifier [comp_keyword identifier] | ε |
 
+## Code Generator
+
+
+
 # Funcionamento
 O programa a ser compilado passa por 3 etapas: Análise Léxica, Análise Sintática e Geração de Código.
 
