@@ -6,7 +6,7 @@ Foi decidido que o compilador seria feito em C++ por ser uma linguagem mais vers
 
 ## Integrantes
 - Rodrigo William da Silva  - 2022002936
-- Daniel José Machado       - xxxxxxxx
+- Daniel José Machado       - 2021025990
 
 ## Utilização
 Para a utilização do compilador, siga os passos abaixo:
@@ -19,7 +19,7 @@ Para a utilização do compilador, siga os passos abaixo:
 
 O compilador irá gerar os seguintes arquivos:
 - "out.exe": Arquivo executável gerado a partir do código de entrada.
-- "arquivo_de_entrada_tokens_comandos.txt": Arquivo contendo os tokens e comandos do código de entrada.
+- "nome_tokens_comandos.txt": Arquivo contendo os tokens e comandos do código de entrada.
 
 
 ## Linguagem
