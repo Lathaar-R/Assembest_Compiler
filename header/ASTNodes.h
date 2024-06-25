@@ -27,26 +27,30 @@ class ASTNode
 {
 public:
     virtual ~ASTNode() = default;
-    virtual void print(int indent = 0) const = 0;
+    virtual void print(std::ofstream &out, int indent = 0) const = 0;
 };
 
-inline void printIndent(int indent)
+inline void printIndent(std::ofstream &out, int indent)
 {
     for (int i = 0; i < indent; ++i)
-        std::cout << "  ";
+    {   
+        if (i < indent) out << " ";
+
+        if(i == indent - 1) out << "|---";
+    }
 }
 
 class Program : public ASTNode
 {
 public:
     std::vector<ASTNodePtr> instructions;
-    void print(int indent = 0) const override
+    void print(std::ofstream &out, int indent = 0) const override
     {
-        printIndent(indent);
-        std::cout << "Program\n";
+        printIndent(out, indent);
+        out << "Program\n";
         for (const auto &instr : instructions)
         {
-            instr->print(indent + 1);
+            instr->print(out, indent + 1);
         }
     }
 };
@@ -60,14 +64,14 @@ public:
     ASTNodePtr identifier;
     LongInstruction(ASTNodePtr kw, ASTNodePtr val1, ASTNodePtr val2, ASTNodePtr id)
         : keyword(kw), value1(val1), value2(val2), identifier(id) {}
-    void print(int indent = 0) const override
+    void print(std::ofstream &out, int indent = 0) const override
     {
-        printIndent(indent);
-        std::cout << "LongInstruction:\n";
-        keyword->print(indent + 1);
-        value1->print(indent + 1);
-        value2->print(indent + 1);
-        identifier->print(indent + 1);
+        printIndent(out, indent);
+        out << "LongInstruction:\n";
+        keyword->print(out, indent + 1);
+        value1->print(out, indent + 1);
+        value2->print(out, indent + 1);
+        identifier->print(out, indent + 1);
     }
 };
 
@@ -79,13 +83,13 @@ public:
     ASTNodePtr value;
     MediumInstruction(ASTNodePtr kw, ASTNodePtr id, ASTNodePtr val)
         : keyword(kw), identifier(id), value(val) {}
-    void print(int indent = 0) const override
+    void print(std::ofstream &out, int indent = 0) const override
     {
-        printIndent(indent);
-        std::cout << "MediumInstruction:\n";
-        keyword->print(indent + 1);
-        identifier->print(indent + 1);
-        value->print(indent + 1);
+        printIndent(out, indent);
+        out << "MediumInstruction:\n";
+        keyword->print(out, indent + 1);
+        identifier->print(out, indent + 1);
+        value->print(out, indent + 1);
     }
 };
 
@@ -95,12 +99,12 @@ public:
     ASTNodePtr keyword;
     ASTNodePtr identifier;
     ShortInstruction(ASTNodePtr kw, ASTNodePtr id) : keyword(kw), identifier(id) {}
-    void print(int indent = 0) const override
+    void print(std::ofstream &out, int indent = 0) const override
     {
-        printIndent(indent);
-        std::cout << "ShortInstruction:\n";
-        keyword->print(indent + 1);
-        identifier->print(indent + 1);
+        printIndent(out, indent);
+        out << "ShortInstruction:\n";
+        keyword->print(out, indent + 1);
+        identifier->print(out, indent + 1);
 
     }
 };
@@ -111,14 +115,18 @@ public:
     ASTNodePtr keyword;
     ASTNodePtr identifier;
     ASTNodePtr tail;
-    CompoundInstruction(ASTNodePtr kw, ASTNodePtr id, ASTNodePtr t) : keyword(kw), identifier(id), tail(t) {}
-    void print(int indent = 0) const override
+    CompoundInstruction(ASTNodePtr kw, ASTNodePtr id, ASTNodePtr t) : keyword(kw), identifier(id) {
+        if(t) tail = t;
+        else tail = nullptr;
+    }
+    void print(std::ofstream &out, int indent = 0) const override
     {
-        printIndent(indent);
-        std::cout << "CompoundInstruction:\n";
-        keyword->print(indent + 1);
-        identifier->print(indent + 1);
-        tail->print(indent + 1);
+        printIndent(out, indent);
+        out << "CompoundInstruction:\n";
+        keyword->print(out, indent);
+        identifier->print(out, indent);
+        if (tail)
+            tail->print(out, indent + 1);
     }
 };
 
@@ -132,22 +140,22 @@ public:
     std::vector<ASTNodePtr> instructions;
     CompoundInstructionTail(ASTNodePtr kw1, ASTNodePtr kw2, ASTNodePtr id1, ASTNodePtr id2, std::vector<ASTNodePtr> instrs)
         : keyword1(kw1), keyword2(kw2), identifier1(id1), identifier2(id2), instructions(instrs) {}
-    void print(int indent = 0) const override
+    void print(std::ofstream &out, int indent = 0) const override
     {
-        printIndent(indent);
-        std::cout << "CompoundInstructionTail:\n";
+        printIndent(out, indent);
+        out << "CompoundInstructionTail:\n";
         if (keyword1)
-            keyword1->print(indent + 1);
+            keyword1->print(out, indent);
         if (identifier1)
-            identifier1->print(indent + 1);
+            identifier1->print(out, indent);
         if (identifier2)
-            identifier2->print(indent + 1);
+            identifier2->print(out, indent);
         for (const auto &instr : instructions)
         {
-            instr->print(indent + 1);
+            instr->print(out, indent+1);
         }
         if (keyword2)
-            keyword2->print(indent + 1);
+            keyword2->print(out, indent);
     }
 };
 
@@ -156,9 +164,9 @@ class Value : public ASTNode
 public:
     ASTNodePtr value;
     Value(ASTNodePtr v) : value(v) {}
-    void print(int indent = 0) const override
+    void print(std::ofstream &out, int indent = 0) const override
     {
-        value->print(indent);
+        value->print(out, indent);
     }
 };
 
@@ -167,10 +175,10 @@ class Identifier : public ASTNode
 public:
     std::string value;
     Identifier(const std::string &n) : value(n) {}
-    void print(int indent = 0) const override
+    void print(std::ofstream &out, int indent = 0) const override
     {
-        printIndent(indent + 1);
-        std::cout << "Identifier: " << value << "\n";
+        printIndent(out, indent + 1);
+        out << "Identifier: " << value << "\n";
     }
 };
 
@@ -179,10 +187,10 @@ class Number : public ASTNode
 public:
     std::string value;
     Number(const std::string &num) : value(num) {}
-    void print(int indent = 0) const override
+    void print(std::ofstream &out, int indent = 0) const override
     {
-        printIndent(indent + 1);
-        std::cout << "Number: " << value << "\n";
+        printIndent(out, indent + 1);
+        out << "Number: " << value << "\n";
     }
 };
 
@@ -191,10 +199,10 @@ class Character : public ASTNode
 public:
     const char value;
     Character(const char &c) : value(c) {}
-    void print(int indent = 0) const override
+    void print(std::ofstream &out, int indent = 0) const override
     {
-        printIndent(indent + 1);
-        std::cout << "Character: " << value << "\n";
+        printIndent(out, indent + 1);
+        out << "Character: " << value << "\n";
     }
 };
 
@@ -203,10 +211,10 @@ class Keyword : public ASTNode
 public:
     std::string keyword;
     Keyword(const std::string &kw) : keyword(kw) {}
-    void print(int indent = 0) const override
+    void print(std::ofstream &out, int indent = 0) const override
     {
-        printIndent(indent + 1);
-        std::cout << "Keyword: " << keyword << "\n";
+        printIndent(out, indent + 1);
+        out << "Keyword: " << keyword << "\n";
     }
 };
 

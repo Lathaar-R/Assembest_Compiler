@@ -24,6 +24,7 @@ compound_instruction ::= comp_keyword identifier compound_instruction_tail
 
 compound_instruction_tail ::= comp_keyword program comp_keyword
                             | ',' identifier [comp_keyword identifier]
+                            | ε
 
 long_keyword ::= "ADD"
 medium_keyword ::= "INT"

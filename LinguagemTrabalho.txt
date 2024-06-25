@@ -1,4 +1,4 @@
-Estrutura das funcoes é a seguinte: XYZ v[n], v[m], v[o]...
+Estrutura das funcoes ï¿½ a seguinte: XYZ v[n], v[m], v[o]...
 
 definindo:
 1 - Suporte dos tipos de dados: inteiro, real, caractere.
@@ -84,15 +84,15 @@ MOD a, b, c calcula o modulo dos valores de a e b e atribui a c
 
 EQL a, b, c verifica se a e b sao iguais e atribui a c
 DIF a, b, c verifica se a e b sao diferentes e atribui a c
-GRT a, b, c verifica se a é maior que b e atribui a c
-LES a, b, c verifica se a é menor que b e atribui a c
-GTE a, b, c verifica se a é maior ou igual a b e atribui a c
-LTE a, b, c verifica se a é menor ou igual a b e atribui a c
+GRT a, b, c verifica se a ï¿½ maior que b e atribui a c
+LES a, b, c verifica se a ï¿½ menor que b e atribui a c
+GTE a, b, c verifica se a ï¿½ maior ou igual a b e atribui a c
+LTE a, b, c verifica se a ï¿½ menor ou igual a b e atribui a c
 
 
 AND a, b, c verifica se a e b sao verdadeiros e atribui a c
 OOR a, b, c verifica se a ou b sao verdadeiros e atribui a c
-NOT a, b    verifica se a é falso e atribui a b
+NOT a, b    verifica se a ï¿½ falso e atribui a b
 
 LBL t       cria um bloco de comandos label
 BGN         inicio do bloco de comandos
@@ -180,7 +180,7 @@ END
 IIF c, t
 ELS e
 
-Expressões Regulares dos Tokens: 
+Expressï¿½es Regulares dos Tokens: 
 
 letra = [ A-Za-z ] 
 digito = [ 0-9 ] 
@@ -205,29 +205,29 @@ resultado esperado
 <KEYWORD, INP> <IDENTIFIER, a> <KEYWORD, INP> <IDENTIFIER, b>
 <KEYWORD, ADD> <IDENTIFIER, a> <COMMA, > <IDENTIFIER, b> <COMMA, > <IDENTIFIER, c>  
 
-INT 	- Declara um número inteiro
-REA 	- Declara um número real
+INT 	- Declara um nï¿½mero inteiro
+REA 	- Declara um nï¿½mero real
 CHR 	- Declara um caractere
-ATR 	- Atribui um valor em uma variável
-INP 	- Lê um valor para uma variável
-OUT     - Escreve um valor de uma variável
+ATR 	- Atribui um valor em uma variï¿½vel
+INP 	- Lï¿½ um valor para uma variï¿½vel
+OUT     - Escreve um valor de uma variï¿½vel
 ADD     - Soma dois valores e atribui a um terceiro
 SUB     - Subtrai dois valores e atribui a um terceiro
 MUL     - Multiplica dois valores e atribui a um terceiro
 DIV     - Divide dois valores e atribui a um terceiro
-MOD     - Calcula o módulo de dois valores e atribui a um terceiro
-EQL     - Verifica se dois valores são iguais e atribui a um terceiro
-DIF     - Verifica se dois valores são diferentes e atribui a um terceiro
-GRT     - Verifica se um valor é maior que outro e atribui a um terceiro
-LES     - Verifica se um valor é menor que outro e atribui a um terceiro
-GTE     - Verifica se um valor é maior ou igual a outro e atribui a um terceiro
-LTE     - Verifica se um valor é menor ou igual a outro e atribui a um terceiro
-AND     - Verifica se dois valores são verdadeiros e atribui a um terceiro
-OOR     - Verifica se um dos dois valores é verdadeiro e atribui a um terceiro
-NOT     - Verifica se um valor é falso e atribui a um terceiro
+MOD     - Calcula o mï¿½dulo de dois valores e atribui a um terceiro
+EQL     - Verifica se dois valores sï¿½o iguais e atribui a um terceiro
+DIF     - Verifica se dois valores sï¿½o diferentes e atribui a um terceiro
+GRT     - Verifica se um valor ï¿½ maior que outro e atribui a um terceiro
+LES     - Verifica se um valor ï¿½ menor que outro e atribui a um terceiro
+GTE     - Verifica se um valor ï¿½ maior ou igual a outro e atribui a um terceiro
+LTE     - Verifica se um valor ï¿½ menor ou igual a outro e atribui a um terceiro
+AND     - Verifica se dois valores sï¿½o verdadeiros e atribui a um terceiro
+OOR     - Verifica se um dos dois valores ï¿½ verdadeiro e atribui a um terceiro
+NOT     - Verifica se um valor ï¿½ falso e atribui a um terceiro
 LBL     - Cria um bloco de comandos label
-BGN     - Início do bloco de comandos
+BGN     - Inï¿½cio do bloco de comandos
 END     - Fim do bloco de comandos
 IIF     - Se um valor for verdadeiro, executa um bloco de comandos
-ELS     - Senão, executa um bloco de comandos
+ELS     - Senï¿½o, executa um bloco de comandos
 RPT     - Enquanto um valor for verdadeiro, executa um bloco de comandos

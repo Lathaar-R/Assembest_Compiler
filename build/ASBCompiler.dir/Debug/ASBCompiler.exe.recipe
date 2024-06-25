@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <ProjectOutputs>
+    <ProjectOutput>
+      <FullPath>D:\Workspace\UNIFEI\Rodrigo\Semestres\5\ECOM06A\Compilador_Assembest\Assembest_Compiler\build\x64\Debug\ZERO_CHECK</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\Workspace\UNIFEI\Rodrigo\Semestres\5\ECOM06A\Compilador_Assembest\Assembest_Compiler\build\Debug\ASBCompiler.exe</FullPath>
+    </ProjectOutput>
+  </ProjectOutputs>
+  <ContentFiles />
+  <SatelliteDlls />
+  <NonRecipeFileRefs />
+</Project>

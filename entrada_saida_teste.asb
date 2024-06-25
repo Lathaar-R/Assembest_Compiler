@@ -1,0 +1,31 @@
+INT a, 0
+INT b, 0
+
+OUT 'n'
+OUT '1'
+OUT ':'
+
+INP a
+
+OUT '\n'
+
+OUT 'n'
+OUT '2'
+OUT ':'
+
+INP b
+
+OUT '\n'
+
+OUT 'n'
+OUT '1'
+OUT '+'
+OUT 'n'
+OUT '2'
+OUT '='
+
+INT c, 0
+
+ADD a, b, c
+
+OUT c

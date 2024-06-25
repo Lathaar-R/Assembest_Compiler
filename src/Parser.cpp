@@ -34,12 +34,12 @@ bool is_comp_keyword(const std::string &token)
 
 bool isIdentifier(const std::string &token)
 {
-    return std::regex_match(token, std::regex("[a-zA-Z_][a-zA-Z0-9_]*"));
+    return std::regex_match(token, std::regex(R"([a-zA-Z_][a-zA-Z0-9_]*)"));
 }
 
 bool isValue(const std::string &token)
 {
-    return std::regex_match(token, std::regex("[0-9]*\\.?[0-9]+")) || isIdentifier(token) || std::regex_match(token, std::regex("'.'"));
+    return std::regex_match(token, std::regex(R"([0-9]*\\.?[0-9]+)")) || isIdentifier(token) || std::regex_match(token, std::regex(R"('(\\.|[^\\'])')"));
 }
 
 ASTNodePtr parseProgram()
@@ -54,6 +54,7 @@ ASTNodePtr parseProgram()
 
 ASTNodePtr parseInstruction()
 {
+    //std::cout << current_token.value << std::endl;
     if (is_long_keyword(current_token.value))
     {
         return parseLongInstruction();
@@ -70,9 +71,13 @@ ASTNodePtr parseInstruction()
     {
         return parseCompoundInstruction();
     }
+    else if(current_token.type == EOF_TOKEN)
+    {
+        return nullptr;
+    }
     else
     {
-        throw std::runtime_error("1Unknown instruction: " + current_token.value);
+        throw std::runtime_error("Unknown instruction: " + current_token.value);
     }
 }
 
@@ -80,15 +85,15 @@ ASTNodePtr parseLongInstruction()
 {
     ASTNodePtr keyword = std::make_shared<Keyword>(current_token.value);
     get_next_token();
-    ASTNodePtr value1 = std::make_shared<Value>(std::make_shared<Number>(current_token.value));
+    ASTNodePtr value1 = current_token.type == IDENTIFIER ? std::make_shared<Value>(std::make_shared<Identifier>(current_token.value)) : std::make_shared<Value>(std::make_shared<Number>(current_token.value));
     get_next_token();
     if (current_token.value != ",")
-        throw std::runtime_error("2Expected ','");
+        throw std::runtime_error("Expected ','");
     get_next_token();
-    ASTNodePtr value2 = std::make_shared<Value>(std::make_shared<Number>(current_token.value));
+    ASTNodePtr value2 = current_token.type == IDENTIFIER ? std::make_shared<Value>(std::make_shared<Identifier>(current_token.value)) : std::make_shared<Value>(std::make_shared<Number>(current_token.value));
     get_next_token();
     if (current_token.value != ",")
-        throw std::runtime_error("3Expected ','");
+        throw std::runtime_error("Expected ','");
     get_next_token();
     ASTNodePtr identifier = std::make_shared<Identifier>(current_token.value);
     get_next_token();
@@ -102,9 +107,9 @@ ASTNodePtr parseMediumInstruction()
     ASTNodePtr identifier = std::make_shared<Identifier>(current_token.value);
     get_next_token();
     if (current_token.value != ",")
-        throw std::runtime_error("4Expected ','");
+        throw std::runtime_error("Expected ','");
     get_next_token();
-    ASTNodePtr value = std::make_shared<Value>(std::make_shared<Number>(current_token.value));
+    ASTNodePtr value = current_token.type == IDENTIFIER ? std::make_shared<Value>(std::make_shared<Identifier>(current_token.value)) : std::make_shared<Value>(std::make_shared<Number>(current_token.value));
     get_next_token();
     return std::make_shared<MediumInstruction>(keyword, identifier, value);
 }
@@ -113,8 +118,9 @@ ASTNodePtr parseShortInstruction()
 {
     ASTNodePtr keyword = std::make_shared<Keyword>(current_token.value);
     get_next_token();
-    if (!isIdentifier(current_token.value))
-        throw std::runtime_error("5Expected identifier");
+
+    if (!isValue(current_token.value))
+        throw std::runtime_error("Expected value");
     ASTNodePtr identifier = std::make_shared<Identifier>(current_token.value);
     get_next_token();
     return std::make_shared<ShortInstruction>(keyword, identifier);
@@ -127,18 +133,24 @@ ASTNodePtr parseCompoundInstruction()
     get_next_token();
     if (!isIdentifier(current_token.value))
     {
-        std::cout << current_token.value << std::endl;
-        throw std::runtime_error("6Expected identifier");
+        //std::cout << current_token.value << std::endl;
+        throw std::runtime_error("1Expected identifier");
     }
     ASTNodePtr identifier = std::make_shared<Identifier>(current_token.value);
     get_next_token();
 
     auto tail = parseCompoundInstructionTail();
+    //std::cout << tail << std::endl;
+    //auto cp = std::make_shared<CompoundInstruction>(keyword, identifier, tail);
+    
+    //std::cout << cp << std::endl;
+
     return std::make_shared<CompoundInstruction>(keyword, identifier, tail);
 }
 
 ASTNodePtr parseCompoundInstructionTail()
 {
+    //std::cout << current_token.value << std::endl;
     if (is_comp_keyword(current_token.value))
     {
         ASTNodePtr keyword = std::make_shared<Keyword>(current_token.value);
@@ -155,7 +167,7 @@ ASTNodePtr parseCompoundInstructionTail()
         ASTNodePtr keyword2 = std::make_shared<Keyword>(current_token.value);
 
         if (!is_comp_keyword(current_token.value))
-            throw std::runtime_error("8Expected compound keyword");
+            throw std::runtime_error("Expected compound keyword");
 
         get_next_token();
 
@@ -166,12 +178,15 @@ ASTNodePtr parseCompoundInstructionTail()
         get_next_token();
         ASTNodePtr identifier1 = std::make_shared<Identifier>(current_token.value);
         get_next_token();
-        if (!is_comp_keyword(current_token.value))
-                return nullptr;
+        // << std::endl;
+        if (!is_comp_keyword(current_token.value)){
+                //std::cout << current_token.value << std::endl;
+                return std::make_shared<CompoundInstructionTail>(nullptr, nullptr, identifier1, nullptr, std::vector<ASTNodePtr>());
+        }
         ASTNodePtr keyword = std::make_shared<Keyword>(current_token.value);
         get_next_token();
         if (!isIdentifier(current_token.value))
-            throw std::runtime_error("9Expected identifier");
+            throw std::runtime_error("2Expected identifier");
         ASTNodePtr identifier2 = std::make_shared<Identifier>(current_token.value);
         get_next_token();
         auto tail = std::make_shared<CompoundInstructionTail>(keyword, nullptr, identifier1, identifier2, std::vector<ASTNodePtr>());
@@ -186,5 +201,6 @@ ASTNodePtr parseCompoundInstructionTail()
 ASTNodePtr parse()
 {
     get_next_token();
+
     return parseProgram();
 }

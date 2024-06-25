@@ -1,0 +1,243 @@
+Tokens and commands recognized: 
+Tokens: EBNF <token_type, token_value>
+<KEYWORD, INT>
+<IDENTIFIER, a>
+<COMMA, ,>
+<NUMBER, 0>
+<KEYWORD, INT>
+<IDENTIFIER, b>
+<COMMA, ,>
+<NUMBER, 0>
+<KEYWORD, OUT>
+<CHARACTER, 'n'>
+<KEYWORD, OUT>
+<CHARACTER, '1'>
+<KEYWORD, OUT>
+<CHARACTER, ':'>
+<KEYWORD, INP>
+<IDENTIFIER, a>
+<KEYWORD, OUT>
+<CHARACTER, '\n'>
+<KEYWORD, OUT>
+<CHARACTER, 'n'>
+<KEYWORD, OUT>
+<CHARACTER, '2'>
+<KEYWORD, OUT>
+<CHARACTER, ':'>
+<KEYWORD, INP>
+<IDENTIFIER, b>
+<KEYWORD, OUT>
+<CHARACTER, '\n'>
+<KEYWORD, LBL>
+<IDENTIFIER, f>
+<KEYWORD, BGN>
+<KEYWORD, OUT>
+<CHARACTER, 'n'>
+<KEYWORD, OUT>
+<CHARACTER, '1'>
+<KEYWORD, OUT>
+<CHARACTER, '>'>
+<KEYWORD, OUT>
+<CHARACTER, 'n'>
+<KEYWORD, OUT>
+<CHARACTER, '2'>
+<KEYWORD, END>
+<KEYWORD, LBL>
+<IDENTIFIER, g>
+<KEYWORD, BGN>
+<KEYWORD, OUT>
+<CHARACTER, 'n'>
+<KEYWORD, OUT>
+<CHARACTER, '1'>
+<KEYWORD, OUT>
+<CHARACTER, '<'>
+<KEYWORD, OUT>
+<CHARACTER, 'n'>
+<KEYWORD, OUT>
+<CHARACTER, '2'>
+<KEYWORD, END>
+<KEYWORD, LBL>
+<IDENTIFIER, h>
+<KEYWORD, BGN>
+<KEYWORD, OUT>
+<CHARACTER, 'n'>
+<KEYWORD, OUT>
+<CHARACTER, '1'>
+<KEYWORD, OUT>
+<CHARACTER, '='>
+<KEYWORD, OUT>
+<CHARACTER, 'n'>
+<KEYWORD, OUT>
+<CHARACTER, '2'>
+<KEYWORD, END>
+<KEYWORD, INT>
+<IDENTIFIER, c>
+<COMMA, ,>
+<NUMBER, 0>
+<KEYWORD, GRT>
+<IDENTIFIER, a>
+<COMMA, ,>
+<IDENTIFIER, b>
+<COMMA, ,>
+<IDENTIFIER, c>
+<KEYWORD, IIF>
+<IDENTIFIER, c>
+<COMMA, ,>
+<IDENTIFIER, f>
+<KEYWORD, LES>
+<IDENTIFIER, a>
+<COMMA, ,>
+<IDENTIFIER, b>
+<COMMA, ,>
+<IDENTIFIER, c>
+<KEYWORD, IIF>
+<IDENTIFIER, c>
+<COMMA, ,>
+<IDENTIFIER, g>
+<KEYWORD, EQL>
+<IDENTIFIER, a>
+<COMMA, ,>
+<IDENTIFIER, b>
+<COMMA, ,>
+<IDENTIFIER, c>
+<KEYWORD, IIF>
+<IDENTIFIER, c>
+<COMMA, ,>
+<IDENTIFIER, h>
+Abstract Syntax Tree (AST) generated: 
+Program
+ |---MediumInstruction:
+   |---Keyword: INT
+   |---Identifier: a
+   |---Number: 0
+ |---MediumInstruction:
+   |---Keyword: INT
+   |---Identifier: b
+   |---Number: 0
+ |---ShortInstruction:
+   |---Keyword: OUT
+   |---Identifier: 'n'
+ |---ShortInstruction:
+   |---Keyword: OUT
+   |---Identifier: '1'
+ |---ShortInstruction:
+   |---Keyword: OUT
+   |---Identifier: ':'
+ |---ShortInstruction:
+   |---Keyword: INP
+   |---Identifier: a
+ |---ShortInstruction:
+   |---Keyword: OUT
+   |---Identifier: '\n'
+ |---ShortInstruction:
+   |---Keyword: OUT
+   |---Identifier: 'n'
+ |---ShortInstruction:
+   |---Keyword: OUT
+   |---Identifier: '2'
+ |---ShortInstruction:
+   |---Keyword: OUT
+   |---Identifier: ':'
+ |---ShortInstruction:
+   |---Keyword: INP
+   |---Identifier: b
+ |---ShortInstruction:
+   |---Keyword: OUT
+   |---Identifier: '\n'
+ |---CompoundInstruction:
+  |---Keyword: LBL
+  |---Identifier: f
+  |---CompoundInstructionTail:
+   |---Keyword: BGN
+   |---ShortInstruction:
+     |---Keyword: OUT
+     |---Identifier: 'n'
+   |---ShortInstruction:
+     |---Keyword: OUT
+     |---Identifier: '1'
+   |---ShortInstruction:
+     |---Keyword: OUT
+     |---Identifier: '>'
+   |---ShortInstruction:
+     |---Keyword: OUT
+     |---Identifier: 'n'
+   |---ShortInstruction:
+     |---Keyword: OUT
+     |---Identifier: '2'
+   |---Keyword: END
+ |---CompoundInstruction:
+  |---Keyword: LBL
+  |---Identifier: g
+  |---CompoundInstructionTail:
+   |---Keyword: BGN
+   |---ShortInstruction:
+     |---Keyword: OUT
+     |---Identifier: 'n'
+   |---ShortInstruction:
+     |---Keyword: OUT
+     |---Identifier: '1'
+   |---ShortInstruction:
+     |---Keyword: OUT
+     |---Identifier: '<'
+   |---ShortInstruction:
+     |---Keyword: OUT
+     |---Identifier: 'n'
+   |---ShortInstruction:
+     |---Keyword: OUT
+     |---Identifier: '2'
+   |---Keyword: END
+ |---CompoundInstruction:
+  |---Keyword: LBL
+  |---Identifier: h
+  |---CompoundInstructionTail:
+   |---Keyword: BGN
+   |---ShortInstruction:
+     |---Keyword: OUT
+     |---Identifier: 'n'
+   |---ShortInstruction:
+     |---Keyword: OUT
+     |---Identifier: '1'
+   |---ShortInstruction:
+     |---Keyword: OUT
+     |---Identifier: '='
+   |---ShortInstruction:
+     |---Keyword: OUT
+     |---Identifier: 'n'
+   |---ShortInstruction:
+     |---Keyword: OUT
+     |---Identifier: '2'
+   |---Keyword: END
+ |---MediumInstruction:
+   |---Keyword: INT
+   |---Identifier: c
+   |---Number: 0
+ |---LongInstruction:
+   |---Keyword: GRT
+   |---Identifier: a
+   |---Identifier: b
+   |---Identifier: c
+ |---CompoundInstruction:
+  |---Keyword: IIF
+  |---Identifier: c
+  |---CompoundInstructionTail:
+   |---Identifier: f
+ |---LongInstruction:
+   |---Keyword: LES
+   |---Identifier: a
+   |---Identifier: b
+   |---Identifier: c
+ |---CompoundInstruction:
+  |---Keyword: IIF
+  |---Identifier: c
+  |---CompoundInstructionTail:
+   |---Identifier: g
+ |---LongInstruction:
+   |---Keyword: EQL
+   |---Identifier: a
+   |---Identifier: b
+   |---Identifier: c
+ |---CompoundInstruction:
+  |---Keyword: IIF
+  |---Identifier: c
+  |---CompoundInstructionTail:
+   |---Identifier: h

@@ -1,0 +1,3 @@
+D:/Workspace/UNIFEI/Rodrigo/Semestres/5/ECOM06A/Compilador_Assembest/Assembest_Compiler/build/CMakeFiles/ASBCompiler.dir
+D:/Workspace/UNIFEI/Rodrigo/Semestres/5/ECOM06A/Compilador_Assembest/Assembest_Compiler/build/CMakeFiles/ALL_BUILD.dir
+D:/Workspace/UNIFEI/Rodrigo/Semestres/5/ECOM06A/Compilador_Assembest/Assembest_Compiler/build/CMakeFiles/ZERO_CHECK.dir

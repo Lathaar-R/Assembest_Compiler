@@ -6,4 +6,4 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 include_directories(header)
 
-add_executable(ASBCompiler main.cpp src/CodeGenerator.cpp src/Lexer.cpp src/Parser.cpp)
+add_executable(ASBCompiler src/main.cpp src/CodeGenerator.cpp src/Lexer.cpp src/Parser.cpp)

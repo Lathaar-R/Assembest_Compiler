@@ -72,18 +72,7 @@ std::vector<token> tokanize(std::string & source_code)
     }
 
     //put an EOF token at the end
-    //tokens.push_back({EOF_TOKEN, "$"});
-
-    //save the tokens to a file
-    std::ofstream file;
-    file.open("tokens.txt");
-    int i = 0;
-    for (auto t : tokens)
-    {
-        file << '<' << tokenTypeToString(t.type) << ", " << t.value << '>' << std::endl;
-        i++;
-    }
-    file.close();
+    //tokens.push_back({EOF_TOKEN, "$"})
 
     return tokens;
 }

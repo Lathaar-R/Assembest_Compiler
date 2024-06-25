@@ -54,23 +54,45 @@ int main(int argc, char const *argv[])
         source_code_test += line + " ";
     }
 
+    file.close();
+
     //tokenize the source code
     std::vector<token> tokens = tokanize(source_code_test);
 
+
+    // for (auto t : tokens)
+    // {
+    //     //std::cout << '<' << tokenTypeToString(t.type) << ", " << t.value << '>' << std::endl;
+    // }
+
+    //save the tokens to a file
+    std::ofstream outputFile;
+    std::string outputName = std::string(argv[1]).substr(0, std::string(argv[1]).find_last_of('.')) + "_tokens_comandos.txt";
+    outputFile.open(outputName);
+    outputFile << "Tokens and commands recognized: " << std::endl;
+    outputFile << "Tokens: EBNF <token_type, token_value>" << std::endl;
+    
+    int i = 0;
     for (auto t : tokens)
     {
-        std::cout << '<' << tokenTypeToString(t.type) << ", " << t.value << '>' << std::endl;
+        outputFile << '<' << tokenTypeToString(t.type) << ", " << t.value << '>' << std::endl;
+        i++;
     }
+
+    
 
     //now parse the tokens
     ASTNodePtr ast;
     try {
         ast = parse();
-        std::cout << "Parsing completed successfully.\n";
-        ast->print();
+        outputFile << "Abstract Syntax Tree (AST) generated: " << std::endl;
+        //print the AST        
+        ast->print(outputFile);
     } catch (const std::exception& e) {
         std::cerr << e.what() << std::endl;
     }
+
+    outputFile.close();
 
     std::ofstream codeFile;
 
@@ -92,12 +114,17 @@ int main(int argc, char const *argv[])
         std::cerr << e.what() << std::endl;
     }
 
-    //run the generated code in the terminal
-    // system("g++ out.cpp -o out");
-    // system(".\\out");
+    codeFile.close();
+
+    //compile the generated code
+    std::string compileCommand = "g++ -o out.exe out.cpp";
+    system(compileCommand.c_str());
+
+    //delete the generated code file
+    std::remove("out.cpp");
 
     //close the file
-    codeFile.close();
+    
 
 
 

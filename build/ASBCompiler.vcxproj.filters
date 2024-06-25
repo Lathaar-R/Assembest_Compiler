@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\Workspace\UNIFEI\Rodrigo\Semestres\5\ECOM06A\Compilador_Assembest\Assembest_Compiler\src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\UNIFEI\Rodrigo\Semestres\5\ECOM06A\Compilador_Assembest\Assembest_Compiler\src\CodeGenerator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\UNIFEI\Rodrigo\Semestres\5\ECOM06A\Compilador_Assembest\Assembest_Compiler\src\Lexer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\UNIFEI\Rodrigo\Semestres\5\ECOM06A\Compilador_Assembest\Assembest_Compiler\src\Parser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\Workspace\UNIFEI\Rodrigo\Semestres\5\ECOM06A\Compilador_Assembest\Assembest_Compiler\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{8616F6A1-4B43-345B-9F0D-08113599FA46}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

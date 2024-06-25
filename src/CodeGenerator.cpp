@@ -324,17 +324,14 @@ void generateCompoundInstructionTail(ASTNodePtr node, std::stringstream &out)
 {
     auto instr = std::dynamic_pointer_cast<CompoundInstructionTail>(node);
 
-    auto keyword1 = std::dynamic_pointer_cast<Keyword>(instr->keyword1);
-    auto keyword2 = std::dynamic_pointer_cast<Keyword>(instr->keyword2);
-    auto identifier1 = std::dynamic_pointer_cast<Identifier>(instr->identifier1);
-    auto identifier2 = std::dynamic_pointer_cast<Identifier>(instr->identifier2);
-
-    if (identifier1 != nullptr)
+    if (instr->identifier1 != nullptr)
     {
+        auto identifier1 = std::dynamic_pointer_cast<Identifier>(instr->identifier1);
         //std::cout << identifier1->value << std::endl;
         out << identifier1->value << "();\n";
-        if (identifier2 != nullptr)
+        if (instr->identifier2 != nullptr)
         {
+            auto identifier2 = std::dynamic_pointer_cast<Identifier>(instr->identifier2);
             //std::cout << identifier2->value << std::endl;
             out << "} else {\n";
             out << identifier2->value << "();\n";
