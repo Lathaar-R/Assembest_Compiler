@@ -114,7 +114,7 @@ Follow(compound_instruction_tail) = {COMP}
 | compound_instruction_tail |               |               |               | comp_keyword program comp_keyword | ',' identifier [comp_keyword identifier] | ε |
 
 ## Code Generator
-
+O code generator foi feito com base na AST gerada pelo parser. A AST é percorrida em pré-ordem e cada nó é traduzido para código C++ intermediário. O código intermediário então é compilado com g++ para gerar o executável final.
 
 
 # Funcionamento
