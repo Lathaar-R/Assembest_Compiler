@@ -2,14 +2,30 @@
 ## Repositorio para o projeto do compilador da linguagem Assembest
 
 Este repositório contém o código do compilador da linguagem "Assembest" da matéria ECOM06A (Compiladores) do curso Engenharia de Computação da Univercidade Federal de Itajubá.
+Foi decidido que o compilador seria feito em C++ por ser uma linguagem mais versátil e com mais recursos, e para treinar a linguagem. Os analizadores léxico e sintático foram feitos do zero, sem o uso de ferramentas como Flex e Bison. Essa decisão foi tomada para que os alunos pudessem entender melhor o funcionamento de um compilador e como ele é feito. Escolhemos um interpretador por ser mais simples de implementar e o mais importante da tarefa, que era a implementação do analizador léxico e sintático, foi feito.
+
+## Integrantes
+- Rodrigo William da Silva  - 2022002936
+- Daniel José Machado       - xxxxxxxx
 
 ## Utilização
-Baixe o repositório e rode o executável do compilador ASBCompiler.exe [arquivo_de_entrada.asb]. O compilador irá gerar um arquivo de saída executável "out.exe" e o "rquivo_de_entrada_tokens_comandos.txt".
+Para a utilização do compilador, siga os passos abaixo:
+1. Clone o repositório.
+2. Abra o terminal na pasta do repositório.
+3. Execute o compilador com o comando abaixo:
+```bash
+./ASBCompiler [arquivo_de_entrada.asb]
+```
+
+O compilador irá gerar os seguintes arquivos:
+- "out.exe": Arquivo executável gerado a partir do código de entrada.
+- "arquivo_de_entrada_tokens_comandos.txt": Arquivo contendo os tokens e comandos do código de entrada.
+
 
 ## Linguagem
 Assembest é uma linguagem de programação de baixo nível interpretada, baseada em Assembly, que possui instruções de controle de fluxo, operações aritméticas e lógicas, e operações de entrada e saída. O compilador da linguagem Assembest foi programada em C++ e gera código intermediário em C++.
 
-A linguagem foi buildada utilizando a ferramenta CMake gerando um executável para o compilador.
+"A linguagem foi construída utilizando a ferramenta CMake, gerando um executável para o compilador."
 
 # Gramática
 
@@ -53,6 +69,7 @@ character ::= ('.')
 
 ### Conjuntos First e Follow
 
+#### First
 First(program) = {LONG, MID, SHOR, COMP, ε}
 
 First(instruction) = {LONG, MID, SHOR, COMP}
@@ -67,6 +84,7 @@ First(compound_instruction) = {COMP}
 
 First(compound_instruction_tail) = {COMP, ',', ε}
 
+#### Follow
 
 Follow(program) = {$}
 
