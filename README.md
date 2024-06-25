@@ -13,7 +13,7 @@ Baixe o repositório e rode o executável do compilador ASBCompiler.exe [arquivo
 
 # Gramática
 
-A Linguagem é uma gramática livre de contexto LL(1) e possui as seguintes regras:
+A Linguagem é uma gramática livre de contexto.
 
 ## Lexer
 
