@@ -98,14 +98,14 @@ Follow(short_instruction) = Follow(instruction) = {$, LONG, MID, SHOR, COMP}
 
 Follow(compound_instruction) = Follow(instruction) = {$, LONG, MID, SHOR, COMP}
 
-Follow(compound_instruction_tail) = {COMP, $}
+Follow(compound_instruction_tail) = {COMP}
 
 
 ### Tabela de Parsing
 
 |               | LONG          | MID           | SHOR          | COMP          | ,             | $             |
 |---------------|---------------|---------------|---------------|---------------|---------------|---------------|
-| program       | instruction   | instruction   | instruction   | instruction   | ε             | ε             |
+| program       | instruction   | instruction   | instruction   | instruction   |              | ε             |
 | instruction   | long_instruction | medium_instruction | short_instruction | compound_instruction |               |               |
 | long_instruction | long_keyword |               |               |               |               |               |
 | medium_instruction |               | medium_keyword |               |               |               |               |
