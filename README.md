@@ -4,11 +4,34 @@
 Este repositório contém o código do compilador da linguagem "Assembest" da matéria ECOM06A (Compiladores) do curso Engenharia de Computação da Univercidade Federal de Itajubá.
 
 ## Linguagem
-Assembest é uma linguagem de programação de baixo nível interpretada, baseada em Assembly, que possui instruções de controle de fluxo, operações aritméticas e lógicas, e operações de entrada e saída.
+Assembest é uma linguagem de programação de baixo nível interpretada, baseada em Assembly, que possui instruções de controle de fluxo, operações aritméticas e lógicas, e operações de entrada e saída. O compilador da linguagem Assembest foi programada em C++ e gera código intermediário em C++.
 
+A linguagem foi buildada utilizando a ferramenta CMake gerando um executável para o compilador.
 
+#Utilização
+Baixe o repositório e rode o executável do compilador ASBCompiler.exe [arquivo_de_entrada.asb]. O compilador irá gerar um arquivo de saída executável "out.exe".
+
+# Gramática
 
 A Linguagem é uma gramática livre de contexto LL(1) e possui as seguintes regras:
+
+## Lexer
+
+O Analizador Lexico foi criado usando regex do C++ e possui as seguintes regras:
+
+```cpp
+    {KEYWORD, std::regex(R"(([a-zA-Z]{3}))")},
+    {IDENTIFIER, std::regex(R"(([a-zA-Z_][a-zA-Z0-9_]*))")},
+    {NUMBER, std::regex(R"(([0-9]*\.?[0-9]+))")},
+    {CHARACTER, std::regex(R"('(\\.|[^\\'])')")},
+    {COMMA, std::regex(R"((,))")}
+```
+
+
+## Parser
+
+O analizador sintático foi criado usando LL(1) (recursão a esquerda com lookahead de 1) com uma descending AST (Abstract Syntax Tree).
+A analize é feita com um analizador sintático preditivo não recursivo, usando recursão como stack do analizador.
 
 ```
 program ::= instruction | instruction program | ε
@@ -27,9 +50,6 @@ number ::= ([0-9]+(\.[0-9]+)?)
 identifier ::= ([a-zA-Z_][a-zA-Z0-9_]*)
 character ::= ('.')
 ```
-
-
-## Parser
 
 ### Conjuntos First e Follow
 
@@ -62,14 +82,6 @@ Follow(compound_instruction) = Follow(instruction) = {$, LONG, MID, SHOR, COMP}
 
 Follow(compound_instruction_tail) = {COMP, $}
 
-<!-- Não-terminal	long_keyword	medium_keyword	short_keyword	comp_keyword	,	$
-program	instruction	instruction	instruction	instruction		ε
-instruction	long_instruction	medium_instruction	short_instruction	compound_instruction		
-long_instruction	long_keyword					
-medium_instruction		medium_keyword				
-short_instruction			short_keyword			
-compound_instruction				comp_keyword		
-compound_instruction_tail				comp_keyword program comp_keyword	',' identifier [comp_keyword identifier]	ε -->
 
 ### Tabela de Parsing
 
